@@ -19,9 +19,16 @@ const DeviceSchema = new mongoose.Schema({
     device_name: String,
     price: Number
 });
+const UserSchema = new mongoose.Schema({
+    name: String,
+    age: Number
+});
+
 
 // create a model based on the schema
 const Device = mongoose.model('Device', DeviceSchema);
+const User = mongoose.model('User', UserSchema);
+
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
@@ -45,6 +52,18 @@ app.post('/createdevice', async (req, res) => {
     try {
         const savedDevice = await device.save();
         res.send(savedDevice);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+//create user
+app.post('/createuser', async (req, res) => {
+    console.log(req.body)
+    const user = new User(req.body);
+    try {
+        const savedUser = await user.save();
+        res.send(savedUser);
     } catch (error) {
         res.status(400).send(error);
     }
@@ -85,16 +104,3 @@ app.delete('/device/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`> Ready on http://localhost:${PORT}`);
 });
-
-({
-    "id": 1001,
-    "user_name": "rahul",
-    "name": [
-        {"first_name": "Rahul"},
-        {"middle_name": ""},
-        {"last_name": "Kumar"}
-    ],
-    "email": "rahul@tecadmin.net",
-    "designation": "Founder and CEO",
-    "location": "India"
-})
