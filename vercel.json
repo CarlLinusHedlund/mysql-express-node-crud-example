@@ -13,6 +13,10 @@
     {
       "src": "/getalldevices",
       "dest": "app.js"
+    },
+    {
+      "src": "/createdevice",
+      "dest": "app.js"
     }
   ]
 }
