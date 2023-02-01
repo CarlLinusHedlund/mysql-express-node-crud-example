@@ -44,7 +44,11 @@ db.once("open", function () {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello i am working my friend <3");
+  res.send("Hello i am working my friend");
+});
+
+app.get("*", (req, res) => {
+  res.send("<3 Hello i am working my friend <3");
 });
 
 // create a new device
